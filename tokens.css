@@ -1,0 +1,244 @@
+/* ============================================================
+   DailyList — Design Tokens
+   task_id: task-20261115-231323-01
+   revision: 1
+   ============================================================ */
+
+/* :color — Core color palette with semantic names for consistency */
+:root {
+  /* Primary brand color — Trustworthy blue, similar to Todoist */
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-500: #3b82f6;
+  --color-primary-600: #2563eb; /* Primary brand */
+  --color-primary-700: #1d4ed8; /* Primary hover */
+  --color-primary-900: #1e3a8a;
+
+  /* Success/Completed state */
+  --color-success-50: #ecfdf5;
+  --color-success-500: #22c55e; /* Completed state */
+  --color-success-600: #16a34a;
+
+  /* Neutral background */
+  --color-bg-body: #f8fafc;   /* Light gray-blue, reduces eye strain */
+  --color-bg-surface: #ffffff; /* White cards */
+
+  /* Text colors */
+  --color-text-primary: #1e293b;   /* Slate-800 for headings */
+  --color-text-secondary: #64748b; /* Slate-500 for body text */
+  --color-text-muted: #94a3b8;     /* Slate-400 for placeholders */
+
+  /* Borders and dividers */
+  --color-border-default: #e2e8f0; /* Slate-200 */
+  --color-border-focus: #3b82f6;    /* Primary blue for focus rings */
+
+  /* Semantic colors */
+  --color-error: #ef4444;           /* Red for errors */
+  --color-warning: #f59e0b;         /* Amber for warnings */
+
+  /* Shadows — subtle depth without heaviness */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.08);
+  --shadow-lg: 0 10px 25px rgba(15, 23, 42, 0.12);
+
+  /* Opacity for states */
+  --opacity-disabled: 0.5;
+  --opacity-muted: 0.6;
+
+  /* Z-index layers */
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+
+  /* Animation timing */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+
+  /* Easing curves */
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* :typography — Font stack and base sizes */
+:root {
+  /* Primary font family — Inter with system fallbacks */
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Inter', -sf-pro-regular, sans-serif;
+  --font-family-mono: ui-monospace, SFMono-Regular, 'SF Mono', monospace;
+
+  /* Base type scale */
+  --text-xs: 0.75rem;   /* 12px */
+  --text-sm: 0.875rem;  /* 14px */
+  --text-base: 1rem;    /* 16px */
+  --text-lg: 1.125rem;  /* 18px */
+  --text-xl: 1.25rem;   /* 20px */
+  --text-2xl: 1.5rem;   /* 24px */
+  --text-3xl: 1.875rem; /* 30px */
+
+  /* Line heights */
+  --leading-tight: 1.25;   /* Headings */
+  --leading-normal: 1.5;   /* Body text */
+
+  /* Font weights */
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;   /* Headings */
+  --font-bold: 700;
+
+  /* Letter spacing */
+  --tracking-tight: -0.025em;   /* Headings */
+  --tracking-normal: 0;         /* Body */
+
+  /* Text transforms */
+  --text-uppercase: uppercase;
+  --letter-spacing-1: 0.05em;
+}
+
+/* :layout — Spacing, sizing, and grid */
+:root {
+  /* Spacing scale — consistent across the product */
+  --space-1: 0.25rem;   /* 4px */
+  --space-2: 0.5rem;    /* 8px */
+  --space-3: 0.75rem;   /* 12px */
+  --space-4: 1rem;      /* 16px */
+  --space-5: 1.25rem;   /* 20px */
+  --space-6: 1.5rem;    /* 24px */
+  --space-8: 2rem;      /* 32px */
+  --space-10: 2.5rem;   /* 40px */
+
+  /* Border radius — friendly, modern shapes */
+  --radius-sm: 4px;
+  --radius-md: 8px;     /* Cards, buttons */
+  --radius-lg: 12px;
+
+  /* Max content width — centered, comfortable reading */
+  --max-content: 1024px;
+
+  /* Container padding for side margins */
+  --container-padding: var(--space-6);
+
+  /* Grid columns for task cards */
+  --grid-cols-sm: 1;     /* Mobile */
+  --grid-cols-md: 2;     /* Tablet+ */
+
+  /* Z-index layers */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-modal: 300;
+  --z-toast: 400;
+
+  /* Animation timing */
+  --duration-fast: 150ms;
+  --duration-normal: 250ms;
+  --duration-slow: 350ms;
+
+  /* Easing curves */
+  --ease-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* :components — Reusable component styles (CSS-only tokens) */
+:root {
+  /* Button heights for touch targets */
+  --btn-height-sm: 2.5rem;   /* 40px */
+  --btn-height-md: 3rem;     /* 48px */
+
+  /* Input padding for comfortable typing */
+  --input-padding: var(--space-3) var(--space-4);
+
+  /* Card shadow */
+  --card-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+
+  /* Focus ring */
+  --focus-ring: 2px solid var(--color-border-focus);
+
+  /* Checkbox size */
+  --checkbox-size: 1.25rem;   /* 20px */
+
+  /* Task card padding */
+  --card-padding: var(--space-4);
+}
+
+/* :states — Visual feedback for interactive elements */
+:root {
+  /* Hover states */
+  --hover-scale: 1.02;
+
+  /* Active press effect */
+  --active-scale: 0.98;
+
+  /* Transition timing for interactions */
+  --transition-fast: color var(--duration-fast), background-color var(--duration-fast), border-color var(--duration-fast), transform var(--duration-fast);
+  --transition-normal: all var(--duration-normal) var(--ease-out);
+
+  /* Disabled opacity */
+  --opacity-disabled: 0.5;
+}
+
+/* :media — Responsive breakpoints */
+@media (min-width: 768px) {
+  :root { --grid-cols-sm: 2; } /* Tablet+ */
+}
+
+@media (min-width: 1024px) {
+  :root { --grid-cols-md: 3; } /* Desktop */
+}
+
+/* :animations — Subtle motion for polish */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: .7; }
+}
+
+/* Utility classes for animations */
+.animate-shimmer {
+  background: linear-gradient(90deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.8) 50%, rgba(255,255,255,0.3) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp var(--duration-normal) var(--ease-out);
+}
+
+.animate-scale-in {
+  animation: scaleIn var(--duration-fast) var(--ease-out);
+}
+
+/* :root — Global resets and base styles (for prototype.html) */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-base);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--color-text-primary);
+  background-color: var(--color-bg-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus styles for accessibility */
+:focus-visible { outline: var(--focus-ring); outline-offset: 2px; }
+
+/* Selection color */
+::selection { background-color: var(--color-primary-100); color: var(--color-text-primary); }
