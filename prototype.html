@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ko" data-silo-stage="prototype">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>DailyList — Prototype</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    /* Design Tokens */
+    :root {
+      --bg: #f9f7f6;
+      --surface: #ffffff;
+      --text: #25221e;
+      --muted: #6f6d6b;
+      --primary: #e34432;
+      --border: #25221e14;
+      --font-sans: Inter, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --radius-md: 8px;
+    }
+
+    /* Base */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: var(--font-sans); background: var(--bg); color: var(--text); font-size: 16px; }
+
+    /* Header */
+    .banner {
+      display: flex; justify-content: space-between; align-items: center; gap: 12px;
+      padding: 8px 16px; background: var(--text); color: #fff; font-size: 13px;
+    }
+    .banner a { color: #fff; text-decoration: none; margin-left: 12px; }
+    .banner a:hover { text-decoration: underline; }
+
+    /* Shell */
+    .shell { display: flex; min-height: calc(100% - 40px); }
+
+    /* Sidebar */
+    aside {
+      width: 240px; background: var(--surface); padding: 20px 12px; border-right: 1px solid var(--border);
+    }
+    .brand { font-weight: 700; margin: 0 12px 16px; letter-spacing: -0.02em; }
+    .nav {
+      display: block; width: 100%; text-align: left; border: 0; background: transparent;
+      color: var(--text); padding: 8px 12px; border-radius: var(--radius-md); cursor: pointer;
+      font-size: 15px; transition: background var(--transition-fast);
+    }
+    .nav:hover { background: rgba(227, 68, 50, 0.08); }
+    .nav.on { background: rgba(227, 68, 50, 0.1); color: var(--primary); font-weight: 600; }
+
+    /* Main */
+    main { flex: 1; padding: 28px 32px; max-width: 720px; }
+    h1 { font-size: 28px; margin: 0 0 16px; font-weight: 500; }
+
+    /* Form */
+    form { display: flex; gap: 8px; margin: 0 0 16px; }
+    input[name="title"] {
+      flex: 1; border: 1px solid rgba(37, 34, 30, 0.18); border-radius: var(--radius-md);
+      padding: 10px 12px; font: inherit; background: var(--surface); color: var(--text);
+      outline: none; transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+    }
+    input[name="title"]:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(227, 68, 50, 0.12); }
+    button[type="submit"] {
+      background: var(--primary); color: #fff; border: 0; border-radius: var(--radius-md);
+      padding: 10px 14px; font: inherit; cursor: pointer; white-space: nowrap;
+      transition: background var(--transition-fast);
+    }
+    button[type="submit"]:hover { background: #d63a2b; }
+    button[type="submit"]:active { transform: scale(0.98); }
+
+    /* Empty State */
+    #empty { color: var(--muted); font-size: 15px; margin-bottom: 16px; }
+
+    /* Task List */
+    ul { list-style: none; margin: 0; padding: 0; }
+    li {
+      display: flex; align-items: center; gap: 10px; padding: 10px 0; border-bottom: 1px solid var(--border);
+    }
+    li.done span { color: var(--muted); text-decoration: line-through; }
+
+    /* Checkbox */
+    .check {
+      width: 20px; height: 20px; border: 2px solid var(--primary); border-radius: 50%;
+      background: transparent; cursor: pointer; flex-shrink: 0; transition: all var(--transition-fast);
+    }
+    .check:hover { border-color: #c0392b; }
+    li.done .check { background: var(--primary); border-color: var(--primary); }
+    li.done .check::after {
+      content: "✓"; color: #fff; font-size: 14px; position: absolute; top: 50%; left: 50%;
+      transform: translate(-50%, -50%); font-weight: 600;
+    }
+
+    /* Footer */
+    footer { padding: 24px 16px; text-align: center; color: var(--muted); font-size: 13px; }
+    footer a { color: var(--primary); text-decoration: none; margin: 0 8px; }
+    footer a:hover { text-decoration: underline; }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .shell { flex-direction: column; }
+      aside { width: 100%; border-right: none; border-bottom: 1px solid var(--border); padding: 12px; }
+      main { padding: 20px 16px; }
+    }
+  </style>
+</head>
+<body>
+  <div data-silo-stage="prototype">
+    <!-- Header -->
+    <header class="banner">
+      <span>로컬 프로토타입 · dailylist.com</span>
+      <span>원본 스냅샷: <a href="public/sites/todoist-com/index.html">todoist</a> · <a href="public/sites/trello-com/index.html">trello</a></span>
+    </header>
+
+    <!-- Shell -->
+    <div class="shell">
+      <!-- Sidebar Navigation -->
+      <aside>
+        <p class="brand">DailyList</p>
+        <button type="button" class="nav on" data-list="today">오늘</button>
+        <button type="button" class="nav" data-list="inbox">받은 편지함</button>
+        <button type="button" class="nav" data-list="upcoming">다음</button>
+      </aside>
+
+      <!-- Main Content -->
+      <main>
+        <h1 id="heading">오늘</h1>
+
+        <!-- Add Task Form -->
+        <form id="add" novalidate>
+          <input name="title" value="" placeholder="할 일을 입력하세요 (예: 보고서 작성, 미팅 준비)" aria-label="작업 추가" autoComplete="off" />
+          <button type="submit">추가</button>
+        </form>
+
+        <!-- Empty State -->
+        <p id="empty">할 일을 추가하세요</p>
+
+        <!-- Task List -->
+        <ul id="list"></ul>
+      </main>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+      <p>&copy; 2026 DailyList. 로컬 프로토타입입니다.</p>
+      <p style="margin-top: 8px;">
+        <a href="#">도움말</a> · <a href="#">개인정보처리방침</a>
+      </p>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+      const KEY = "silo-prototype-dailylist";
+      const LABELS = { today: '오늘', inbox: '받은 편지함', upcoming: '다음' };
+      let filter = 'today';
+
+      // Load tasks from localStorage
+      function load() {
+        try {
+          const v = JSON.parse(localStorage.getItem(KEY) || '[]');
+          return Array.isArray(v) ? v : [];
+        } catch (e) {
+          console.error('Failed to load tasks:', e);
+          return [];
+        }
+      }
+
+      // Save tasks to localStorage
+      function save(items) {
+        try {
+          localStorage.setItem(KEY, JSON.stringify(items));
+        } catch (e) {
+          console.error('Failed to save tasks:', e);
+          alert('저장 중 오류가 발생했습니다.');
+        }
+      }
+
+      // Render task list for current filter
+      function render() {
+        const items = load();
+        const shown = items.filter(it => it.list === filter);
+
+        document.getElementById('heading').textContent = LABELS[filter];
+
+        // Update nav buttons
+        document.querySelectorAll('.nav').forEach(btn => {
+          btn.classList.toggle('on', btn.getAttribute('data-list') === filter);
+        });
+
+        // Show/hide empty state
+        const empty = document.getElementById('empty');
+        const ul = document.getElementById('list');
+
+        if (shown.length === 0) {
+          empty.hidden = false;
+          ul.innerHTML = '';
+        } else {
+          empty.hidden = true;
+          ul.innerHTML = shown.map(it => `
+            <li class="${it.completed ? 'done' : ''}" data-id="${it.id}">
+              <button type="button" class="check" aria-label="완료 토글"></button>
+              <span>${escapeHtml(it.title)}</span>
+            </li>
+          `).join('');
+        }
+      }
+
+      // Escape HTML to prevent XSS
+      function escapeHtml(str) {
+        const div = document.createElement('div');
+        div.textContent = str;
+        return div.innerHTML;
+      }
+
+      // Add task on form submit
+      document.getElementById('add').addEventListener('submit', e => {
+        e.preventDefault();
+        const input = e.target.title;
+        const title = (input.value || '').trim();
+
+        if (!title) return;
+
+        const items = load();
+        items.push({
+          id: String(Date.now()),
+          title,
+          completed: false,
+          list: filter
+        });
+
+        save(items);
+        input.value = '';
+        render();
+      });
+
+      // Toggle completion on checkbox click
+      document.getElementById('list').addEventListener('click', e => {
+        const li = e.target.closest('li');
+        if (!li || !e.target.classList.contains('check')) return;
+
+        const items = load().map(it =>
+          it.id === li.dataset.id ? { ...it, completed: !it.completed } : it
+        );
+
+        save(items);
+        render();
+      });
+
+      // Switch filter on nav click
+      document.querySelectorAll('.nav').forEach(btn => {
+        btn.addEventListener('click', () => {
+          filter = btn.getAttribute('data-list');
+          render();
+        });
+      });
+
+      // Initial render
+      render();
+    </script>
+  </div>
+</body>
+</html>
